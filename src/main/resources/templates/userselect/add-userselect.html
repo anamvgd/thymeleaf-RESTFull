@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Add User Select</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="../css/shards.min.css">
+</head>
+<body>
+	<div class="container my-5">
+		<h2 class="mb-5">New User Select</h2>
+		<div class="row">
+			<div class="col-md-6">
+				<form action="#" th:action="@{/userselect/add-userselect/}"
+					th:object="${userselect}" method="post">
+					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="usselTablename" class="col-form-label">Table
+								name</label> <input th:field="*{usselTablename}" class="form-control"
+								id="usselTablename" placeholder="Table name"> <span
+								th:if="${#fields.hasErrors('usselTablename')}"
+								th:errors="*{usselTablename}" class="text-danger"></span>
+						</div>
+
+						<div class="form-group col-md-6">
+							<label for="usselValuekeycolumn" class="col-form-label">Value
+								key column</label> <input th:field="*{usselValuekeycolumn}"
+								class="form-control" id="usselValuekeycolumn"
+								placeholder="Value key column"> <span
+								th:if="${#fields.hasErrors('usselValuekeycolumn')}"
+								th:errors="*{usselValuekeycolumn}" class="text-danger"></span>
+						</div>
+
+						<div class="form-group col-md-6">
+							<label for="usselValueusercolumn" class="col-form-label">Value
+								user column</label> <input th:field="*{usselValueusercolumn}"
+								class="form-control" id="usselValueusercolumn"
+								placeholder="Value user column"> <span
+								th:if="${#fields.hasErrors('usselValueusercolumn')}"
+								th:errors="*{usselValueusercolumn}" class="text-danger"></span>
+						</div>
+
+						<div class="form-group col-md-6">
+							<label for="usselWherestatement" class="col-form-label">Where
+								statement</label> <input th:field="*{usselWherestatement}"
+								class="form-control" id="usselWherestatement"
+								placeholder="Where statement"> <span
+								th:if="${#fields.hasErrors('usselWherestatement')}"
+								th:errors="*{usselWherestatement}" class="text-danger"></span>
+						</div>
+
+						<div class="form-group col-md-6">
+							<label for="triggerr" class="col-form-label">Triggerr</label> <select
+								th:field="*{triggerr}" class="form-control" id="triggerr">
+								<option th:each="trig : ${triggerr}" th:value="${trig.trigId}"
+									th:text="${trig.trigName}" />
+							</select>
+						</div>
+						<div></div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 mt-3">
+							<input type="submit" name="action" class="btn btn-primary"
+								value="ADD">
+						</div>
+						<div class="col-md-3 mt-3">
+							<input type="reset" class="btn btn-secondary" value="CLEAR">
+						</div>
+						<div class="col-md-3 mt-3">
+							<input type="submit" name="action" class="btn btn-secondary"
+								value="CANCEL">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
