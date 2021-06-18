@@ -7,6 +7,7 @@ import javax.validation.constraints.Size;
 
 import com.exercise.taller1.validations.TriggerTypeAddValidation;
 import com.exercise.taller1.validations.TriggerTypeEditValidation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -38,6 +39,7 @@ public class Triggertype implements Serializable {
 
 	//bi-directional many-to-one association to Triggerr
 	@OneToMany(mappedBy="triggertype")
+	@JsonIgnore
 	private List<Triggerr> triggerrs;
 
 	public Triggertype() {

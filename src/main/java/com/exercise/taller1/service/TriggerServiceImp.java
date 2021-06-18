@@ -43,11 +43,10 @@ public class TriggerServiceImp implements TriggerService {
 
 	@Override
 	public Triggerr edit(long id, String name, String scope) {
-		Triggerr triggerDummy = new Triggerr();
-		triggerDummy.setTrigId(id);
+		Triggerr triggerDummy = findById(id);
 		triggerDummy.setTrigName(name);
 		triggerDummy.setTrigScope(scope);
-		triggerDao.save(triggerDummy);
+		triggerDao.edit(triggerDummy);
 		return triggerDummy;
 	}
 

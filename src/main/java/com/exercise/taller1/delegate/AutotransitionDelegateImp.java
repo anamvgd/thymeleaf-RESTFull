@@ -21,9 +21,14 @@ public class AutotransitionDelegateImp implements AutotransitionDelegate{
 	}
 
 	@Override
-	public Autotransition edit(long id, String name, String logicalOperand, String isActive) throws Exception {
+	public void edit(long id, String name, String logicalOperand, String isActive) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		Autotransition autotransitionDummy = findById(id);
+		autotransitionDummy.setAutotranName(name);
+		autotransitionDummy.setAutotranIsactive(isActive);
+		autotransitionDummy.setAutotranLogicaloperand(logicalOperand);
+		restTemplate.put( SERVER + "api/autotransitions", autotransitionDummy, Autotransition.class);
+
 	}
 
 	@Override
@@ -63,26 +68,31 @@ public class AutotransitionDelegateImp implements AutotransitionDelegate{
 
 	@Override
 	public Autotransition findById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Autotransition auto = restTemplate.getForObject(SERVER+"api/autotransitions/"+id, Autotransition.class); 
+		return auto;
 	}
 
 	@Override
 	public Iterable<FevInstitution> findAllFev() {
-		// TODO Auto-generated method stub
-		return null;
+		FevInstitution[] insts = restTemplate.getForObject(SERVER+"api/fevInstitutions",FevInstitution[].class );
+		List<FevInstitution> nueva = Arrays.asList(insts);
+		
+		return nueva;
 	}
 
 	@Override
-	public void add(FevInstitution fevInstitution) {
-		// TODO Auto-generated method stub
+	public void addFev(FevInstitution fevInstitution) {
+		
+		FevInstitution fev = restTemplate.postForObject( SERVER + "api/fevInstitutions", fevInstitution, FevInstitution.class);
 		
 	}
 
 	@Override
 	public FevInstitution findByIdFev(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		FevInstitution fev = restTemplate.getForObject(SERVER+"api/fevInstitutions/"+id, FevInstitution.class); 
+		return fev;
 	}
 
 }

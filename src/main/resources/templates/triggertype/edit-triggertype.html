@@ -21,7 +21,7 @@
 		<div class="row">
 			<div class="col-md-6">
 				<form action="#"
-					th:action="@{/triggertype/edit/{id}(id=${triggertype.trigtypeId})}"
+					th:action="@{/triggertype/edit-triggertype/{id}(id=${triggertype.trigtypeId})}"
 					th:object="${triggertype}" method="post">
 					<div class="row">
 						<input type="hidden" th:field="*{trigtypeId}" class="form-control" id="trigtypeId"

@@ -9,11 +9,11 @@ public interface TriggerTypeService {
 
 	public Triggertype edit(BigDecimal instInstId, long trigtypeId, String trigtypeName);
 
-	public Optional<Triggertype> findById(long id);
+	public Triggertype findById(long id);
 
 	public Iterable<Triggertype> findAll();
 
-	public Triggertype save(Triggertype triggertype);
+	public void save(Triggertype triggertype);
 
 	public void delete(Triggertype triggertype);
 }

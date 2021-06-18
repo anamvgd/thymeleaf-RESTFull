@@ -54,10 +54,11 @@ public class AutotransitionServiceImp implements AutotransitionService {
 		if (name == " " || name == "" || name.equalsIgnoreCase(" ") || name.equalsIgnoreCase("")) {
 			throw new Exception("El nombre no debe ser nulo");
 		} else {
-			autotransitionDummy.setAutotranName(name);
-			autotransitionDummy.setAutotranIsactive(isActive);
-			autotransitionDummy.setAutotranLogicaloperand(logicalOperand);
-			autotransitionDao.edit(autotransitionDummy);
+			Autotransition at = findById(id);
+			at.setAutotranName(name);
+			at.setAutotranIsactive(isActive);
+			at.setAutotranLogicaloperand(logicalOperand);
+			autotransitionDao.edit(at);
 		}
 
 		return autotransitionDummy;

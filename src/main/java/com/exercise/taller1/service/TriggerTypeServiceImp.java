@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.exercise.taller1.daos.TriggerTypeDAO;
 import com.exercise.taller1.model.FevInstitution;
 import com.exercise.taller1.model.Triggertype;
 import com.exercise.taller1.repository.FevInstitutionRepository;
@@ -13,10 +15,10 @@ import com.exercise.taller1.repository.TriggertypeRepository;
 public class TriggerTypeServiceImp implements TriggerTypeService {
 	
 	public FevInstitutionRepository fevInstitutionRepository;
-	public TriggertypeRepository triggertypeRepository;
+	public TriggerTypeDAO triggertypeRepository;
 
 	@Autowired
-	public TriggerTypeServiceImp(FevInstitutionRepository fevInstitutionRepository, TriggertypeRepository triggertypeRepository) {
+	public TriggerTypeServiceImp(FevInstitutionRepository fevInstitutionRepository, TriggerTypeDAO triggertypeRepository) {
 		this.fevInstitutionRepository = fevInstitutionRepository;
 		this.triggertypeRepository = triggertypeRepository;
 	}
@@ -36,17 +38,16 @@ public class TriggerTypeServiceImp implements TriggerTypeService {
 
 	@Override
 	public Triggertype edit(BigDecimal instInstId, long trigtypeId, String trigtypeName) {
-		Triggertype triggerDummy = new Triggertype();
+		Triggertype triggerDummy = findById(trigtypeId);
 		triggerDummy.setInstInstId(instInstId);
-		triggerDummy.setTrigtypeId(trigtypeId);
 		triggerDummy.setTrigtypeName(trigtypeName);
-		triggertypeRepository.save(triggerDummy);
+		triggertypeRepository.edit(triggerDummy);
 		
 		return triggerDummy;
 	}
 
 	@Override
-	public Optional<Triggertype> findById(long id) {
+	public Triggertype findById(long id) {
 		 return triggertypeRepository.findById(id);
 	}
 
@@ -56,8 +57,8 @@ public class TriggerTypeServiceImp implements TriggerTypeService {
 	}
 
 	@Override
-	public Triggertype save(Triggertype triggertype) {
-		 return triggertypeRepository.save(triggertype);
+	public void save(Triggertype triggertype) {
+		triggertypeRepository.save(triggertype);
 	}
 
 	@Override

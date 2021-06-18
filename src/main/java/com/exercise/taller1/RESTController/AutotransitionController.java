@@ -1,21 +1,21 @@
-package com.exercise.taller1.delegate;
+package com.exercise.taller1.RESTController;
 
 import java.util.List;
 
 import com.exercise.taller1.model.Autotransition;
 import com.exercise.taller1.model.FevInstitution;
 
-public interface AutotransitionDelegate {
+public interface AutotransitionController {
 	
-	public void edit(long id, String name, String logicalOperand, String isActive) throws Exception;
+	public Autotransition edit(Autotransition auto) throws Exception;
 
-	public Autotransition add(long idInstitution, long idEventStatus);
+	public Autotransition add(Autotransition auto);
 	
 	public List<Autotransition> findAll();
 	
 	public void save(Autotransition autotransition);
 	
-	public void delete(Autotransition autotransition);
+	public void delete(long id);
 	
 	public Autotransition findById(long id);
 	
@@ -24,5 +24,5 @@ public interface AutotransitionDelegate {
 	public void addFev(FevInstitution fevInstitution);
 	
 	public FevInstitution findByIdFev(long id);
-
+	
 }

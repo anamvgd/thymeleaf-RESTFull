@@ -18,7 +18,5 @@ public Userselect add(long idUsr, long idTrig);
 	public void delete(Userselect userselect);
 	
 	public Userselect findById(long id);
-	
-	public Triggerr findByIdTrigger(long id);
 
 }

@@ -7,6 +7,7 @@ import javax.validation.constraints.Size;
 
 import com.exercise.taller1.validations.TriggerrAddValidation;
 import com.exercise.taller1.validations.TriggerrEditValidation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
 
@@ -38,14 +39,17 @@ public class Triggerr implements Serializable {
 
 	//bi-directional many-to-one association to AutotranTrigger
 	@OneToMany(mappedBy="triggerr")
+	@JsonIgnore
 	private List<AutotranTrigger> autotranTriggers;
 
 	//bi-directional many-to-one association to Queueautotransition
 	@OneToMany(mappedBy="triggerr")
+	@JsonIgnore
 	private List<Queueautotransition> queueautotransitions;
 
 	//bi-directional many-to-one association to QueueAutohistory
 	@OneToMany(mappedBy="triggerr")
+	@JsonIgnore
 	private List<QueueAutohistory> queueAutohistories;
 
 	//bi-directional many-to-one association to Triggertype
@@ -55,6 +59,7 @@ public class Triggerr implements Serializable {
 
 	//bi-directional many-to-one association to Userselect
 	@OneToMany(mappedBy="triggerr")
+	@JsonIgnore
 	private List<Userselect> userselects;
 
 	public Triggerr() {

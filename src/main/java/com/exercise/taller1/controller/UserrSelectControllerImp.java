@@ -56,7 +56,7 @@ public class UserrSelectControllerImp {
 		return "redirect:/userselect/";
 	}
 
-	@GetMapping("/userselect/edit/{id}")
+	@GetMapping("/userselect/edit-userselect/{id}")
 	public String showUpdateForm(@PathVariable("id") long id, Model model) {
 		Userselect userselect = userSelectService.findById(id);
 		if (userselect == null)
@@ -67,7 +67,7 @@ public class UserrSelectControllerImp {
 		return "userselect/edit-userselect";
 	}
 
-	@PostMapping("/userselect/edit/{id}")
+	@PostMapping("/userselect/edit-userselect/{id}")
 	public String updateUserSelect(@PathVariable("id") long id,
 			@RequestParam(value = "action", required = true) String action,
 			@Validated(UserrSelectEditValidation.class) Userselect userselect, BindingResult bindingResult, Model model) {
@@ -77,7 +77,7 @@ public class UserrSelectControllerImp {
 				model.addAttribute("triggerr", triggerService.findAll());
 				return "userselect/edit-userselect";
 			}
-			userSelectService.save(userselect);
+			userSelectService.edit(id, userselect.getUsselTablename(),userselect.getUsselValuekeycolumn(),userselect.getUsselValueusercolumn(),userselect.getUsselWherestatement());
 		}
 		return "redirect:/userselect/";
 	}

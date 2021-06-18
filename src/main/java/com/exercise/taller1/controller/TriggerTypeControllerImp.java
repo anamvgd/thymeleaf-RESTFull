@@ -57,18 +57,18 @@ public class TriggerTypeControllerImp {
 		return "redirect:/triggertype/";
 	}
 
-	@GetMapping("/triggertype/edit/{id}")
+	@GetMapping("/triggertype/edit-triggertype/{id}")
 	public String showUpdateForm(@PathVariable("id") long id, Model model) {
-		Optional<Triggertype> trigtype = triggerTypeService.findById(id);
+		Triggertype trigtype = triggerTypeService.findById(id);
 		if (trigtype == null)
 			throw new IllegalArgumentException("Invalid user Id:" + id);
 
-		model.addAttribute("triggertype", trigtype.get());
+		model.addAttribute("triggertype", trigtype);
 		model.addAttribute("fevInstitution", fevInstitutionService.findAllFev());
 		return "triggertype/edit-triggertype";
 	}
 
-	@PostMapping("/triggertype/edit/{id}")
+	@PostMapping("/triggertype/edit-triggertype/{id}")
 	public String updateTriggerType(@PathVariable("id") long id,
 			@RequestParam(value = "action", required = true) String action,
 			@Validated(TriggerTypeEditValidation.class) Triggertype trigtype, BindingResult bindingResult, Model model) {
@@ -78,15 +78,14 @@ public class TriggerTypeControllerImp {
 				model.addAttribute("fevInstitution", fevInstitutionService.findAllFev());
 				return "triggertype/edit-triggertype";
 			}
-			triggerTypeService.save(trigtype);
+			triggerTypeService.edit(trigtype.getInstInstId(),id,trigtype.getTrigtypeName());
 		}
 		return "redirect:/triggertype/";
 	}
 
 	@GetMapping("/triggertype/del/{id}")
 	public String deleteTriggerType(@PathVariable("id") long id, Model model) {
-		Triggertype trigtype = triggerTypeService.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+		Triggertype trigtype = triggerTypeService.findById(id);
 		triggerTypeService.delete(trigtype);
 		return "redirect:/triggertype/";
 	}

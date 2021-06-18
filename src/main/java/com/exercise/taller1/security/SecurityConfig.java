@@ -45,9 +45,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.authorizeRequests().antMatchers("/login**").permitAll().antMatchers("/triggertype/**")
+		httpSecurity.csrf().disable().authorizeRequests().antMatchers("/api/**").permitAll().and()
+				.authorizeRequests().antMatchers("/login**").permitAll().antMatchers("/triggertype/**")
 				.hasRole("administrador").antMatchers("/autotransition/**", "/userselect/**", "/trigger/**")
-				.hasAnyRole("operador").anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll()
+				.hasAnyRole("operador").anyRequest().authenticated().and().httpBasic().and().formLogin().loginPage("/login").permitAll()
 				.and().logout().invalidateHttpSession(true).clearAuthentication(true)
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout")
 				.permitAll().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);

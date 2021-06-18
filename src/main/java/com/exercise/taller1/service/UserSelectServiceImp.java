@@ -38,12 +38,13 @@ public class UserSelectServiceImp implements UserSelectService {
 
 	@Override
 	public Userselect edit(long id, String tableName, String valuekey, String valueUser, String statem) {
-		Userselect userDummy = new Userselect();
-		userDummy.setUsselId(id);
+		Userselect userDummy = findById(id);
 		userDummy.setUsselTablename(tableName);
 		userDummy.setUsselValuekeycolumn(valuekey);
 		userDummy.setUsselValueusercolumn(valueUser);
 		userDummy.setUsselWherestatement(statem);
+		
+		userSelectDao.edit(userDummy);
 
 		return userDummy;
 	}

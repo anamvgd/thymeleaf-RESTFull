@@ -54,6 +54,7 @@ public class AutotransitionControllerImp {
 				model.addAttribute("fevInstitution", autotransitionService.findAllFev());
 				return "autotransition/add-autotransition";
 			} else {
+				System.out.println(autotransition.getAutotranName());
 				autotransitionService.save(autotransition);
 			}
 		return "redirect:/autotransition/";
@@ -73,19 +74,20 @@ public class AutotransitionControllerImp {
 	@PostMapping("/autotransition/edit/{id}")
 	public String updateAutotran(@PathVariable("id") long id,
 			@RequestParam(value = "action", required = true) String action,
-			@Validated(AutotranEditValidation.class) Autotransition autotransition, BindingResult bindingResult, Model model) {
+			@Validated(AutotranEditValidation.class) Autotransition autotransition, BindingResult bindingResult, Model model) throws Exception {
 		if (action != null && !action.equals("CANCEL")) {
 			if (bindingResult.hasErrors()) {
 				model.addAttribute("autotransition", autotransition);
 				model.addAttribute("fevInstitution", autotransitionService.findAllFev());
 				return "autotransition/edit-autotransition";
 			}
-			autotransitionService.save(autotransition);
+			
+			autotransitionService.edit(id,autotransition.getAutotranName(),autotransition.getAutotranLogicaloperand(),autotransition.getAutotranIsactive());
 		}
 		return "redirect:/autotransition/";
 	}
 
-	@GetMapping("/users/del/{id}")
+	@GetMapping("/autotransition/del/{id}")
 	public String deleteAutotran(@PathVariable("id") long id, Model model) {
 		Autotransition autotran = autotransitionService.findById(id);
 		autotransitionService.delete(autotran);

@@ -56,7 +56,7 @@ public class TriggerControllerImp {
 		return "redirect:/triggerr/";
 	}
 
-	@GetMapping("/triggerr/edit/{id}")
+	@GetMapping("/triggerr/edit-triggerr/{id}")
 	public String showUpdateForm(@PathVariable("id") long id, Model model) {
 		Triggerr triggerr = triggerService.findById(id);
 		if (triggerr == null)
@@ -64,10 +64,10 @@ public class TriggerControllerImp {
 
 		model.addAttribute("triggerr", triggerr);
 		model.addAttribute("triggertype", triggerTypeService.findAll());
-		return "trigger/edit-triggerr";
+		return "triggerr/edit-triggerr";
 	}
 
-	@PostMapping("/triggerr/edit/{id}")
+	@PostMapping("/triggerr/edit-triggerr/{id}")
 	public String updateTriggerr(@PathVariable("id") long id,
 			@RequestParam(value = "action", required = true) String action,
 			@Validated(TriggerrEditValidation.class) Triggerr triggerr, BindingResult bindingResult, Model model) {
@@ -78,7 +78,7 @@ public class TriggerControllerImp {
 				model.addAttribute("triggertype", triggerTypeService.findAll());
 				return "triggerr/edit-triggerr";
 			}
-			triggerService.save(triggerr);
+			triggerService.edit(id,triggerr.getTrigName(),triggerr.getTrigScope());
 		}
 		return "redirect:/triggerr/";
 	}

@@ -9,6 +9,8 @@ import javax.validation.constraints.Size;
 import com.exercise.taller1.validations.AutotranAddValidation;
 import com.exercise.taller1.validations.AutotranEditValidation;
 import com.exercise.taller1.validations.Validation1;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -52,6 +54,7 @@ public class Autotransition implements Serializable {
 
 	//bi-directional many-to-one association to Actionn
 	@OneToMany(mappedBy="autotransition")
+	@JsonIgnore
 	private List<Actionn> actionns;
 
 	//bi-directional many-to-one association to Eventstatus
@@ -66,14 +69,17 @@ public class Autotransition implements Serializable {
 
 	//bi-directional many-to-one association to AutotranTrigger
 	@OneToMany(mappedBy="autotransition")
+	@JsonIgnore
 	private List<AutotranTrigger> autotranTriggers;
 
 	//bi-directional many-to-one association to Personautotran
 	@OneToMany(mappedBy="autotransition")
+	@JsonIgnore
 	private List<Personautotran> personautotrans;
 
 	//bi-directional many-to-one association to Precondition
 	@OneToMany(mappedBy="autotransition")
+	@JsonIgnore
 	private List<Precondition> preconditions;
 
 	public Autotransition() {

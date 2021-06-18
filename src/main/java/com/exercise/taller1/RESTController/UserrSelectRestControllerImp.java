@@ -1,14 +1,19 @@
 package com.exercise.taller1.RESTController;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,73 +25,50 @@ import com.exercise.taller1.validations.UserrSelectEditValidation;
 
 
 @RestController
-public class UserrSelectRestControllerImp {
-
-	public UserSelectService userSelectService;
-	public TriggerService triggerService;
+public class UserrSelectRestControllerImp implements UserrSelectController {
 
 	@Autowired
-	public UserrSelectRestControllerImp(UserSelectService userSelectService, TriggerService triggerService) {
-		this.userSelectService = userSelectService;
-		this.triggerService = triggerService;
+	public UserSelectService userSelectService;
+	@Autowired
+	public TriggerService triggerService;
+	
+	@Override
+	@PutMapping("/api/userselects")
+	public Userselect edit(@RequestBody Userselect auto) throws Exception {
+		// TODO Auto-generated method stub
+		return userSelectService.edit(auto.getUsselId(), auto.getUsselTablename(), auto.getUsselValuekeycolumn(), auto.getUsselValueusercolumn(), auto.getUsselWherestatement());
+	}
+	@Override
+	@PostMapping("/api/userselects/adds")
+	public Userselect add(@RequestBody Userselect auto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	@GetMapping("/api/userselects")
+	public List<Userselect> findAll() {
+		// TODO Auto-generated method stub
+		return userSelectService.findAll();
+	}
+	@Override
+	@PostMapping("/api/userselects")
+	public void save(@RequestBody Userselect autotransition) {
+		// TODO Auto-generated method stub
+		userSelectService.save(autotransition);
+	}
+	@Override
+	@DeleteMapping("/api/userselects/{id}")
+	public void delete(@PathVariable long id) {
+		// TODO Auto-generated method stub
+		userSelectService.delete(userSelectService.findById(id));
+	}
+	@Override
+	@GetMapping("/api/userselects/{id}")
+	public Userselect findById(@PathVariable long id) {
+		// TODO Auto-generated method stub
+		return userSelectService.findById(id);
 	}
 
-	@GetMapping("/userselect/")
-	public String indexUserselect(Model model) {
-		model.addAttribute("userselect", userSelectService.findAll());
-		return "userselect/index";
-	}
-
-	@GetMapping("/userselect/add-userselect")
-	public String addUserSelect(Model model, @ModelAttribute("autotransition") Userselect userselect) {
-		model.addAttribute("userselect", new Userselect());
-		model.addAttribute("triggerr", triggerService.findAll());
-		return "userselect/add-userselect";
-	}
-
-	@PostMapping("/userselect/add-userselect")
-	public String saveUserSelect(@Validated(UserrSelectAddValidation.class) Userselect userselect,
-			BindingResult bindingResult, @RequestParam(value = "action", required = true) String action, Model model) {
-		if (!action.equals("Cancel"))
-			if (bindingResult.hasErrors()) {
-				model.addAttribute("triggerr", triggerService.findAll());
-				return "userselect/add-userselect";
-			} else {
-				userSelectService.save(userselect);
-			}
-		return "redirect:/userselect/";
-	}
-
-	@GetMapping("/userselect/edit/{id}")
-	public String showUpdateForm(@PathVariable("id") long id, Model model) {
-		Userselect userselect = userSelectService.findById(id);
-		if (userselect == null)
-			throw new IllegalArgumentException("Invalid user Id:" + id);
-
-		model.addAttribute("userselect", userselect);
-		model.addAttribute("triggerr", triggerService.findAll());
-		return "userselect/edit-userselect";
-	}
-
-	@PostMapping("/userselect/edit/{id}")
-	public String updateUserSelect(@PathVariable("id") long id,
-			@RequestParam(value = "action", required = true) String action,
-			@Validated(UserrSelectEditValidation.class) Userselect userselect, BindingResult bindingResult, Model model) {
-		if (action != null && !action.equals("Cancel")) {
-			if (bindingResult.hasErrors()) {
-				model.addAttribute("userselect", userselect);
-				model.addAttribute("triggerr", triggerService.findAll());
-				return "userselect/edit-userselect";
-			}
-			userSelectService.save(userselect);
-		}
-		return "redirect:/userselect/";
-	}
-
-	@GetMapping("/userselect/del/{id}")
-	public String deleteUserSelect(@PathVariable("id") long id, Model model) {
-		Userselect userselect = userSelectService.findById(id);
-		userSelectService.delete(userselect);
-		return "redirect:/userselect/";
-	}
+	
+	
 }

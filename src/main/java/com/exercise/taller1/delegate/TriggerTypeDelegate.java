@@ -11,7 +11,7 @@ public interface TriggerTypeDelegate {
 
 	public Triggertype edit(BigDecimal instInstId, long trigtypeId, String trigtypeName);
 
-	public Optional<Triggertype> findById(long id);
+	public Triggertype findById(long id);
 
 	public Iterable<Triggertype> findAll();
 
