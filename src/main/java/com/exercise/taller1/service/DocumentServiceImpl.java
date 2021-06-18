@@ -63,7 +63,7 @@ public class DocumentServiceImpl implements DocumentService {
 	@Override
 	public Documentt saveDocumentt(Documentt tt) {
 		// TODO Auto-generated method stub
-		return null;
+		return docuRepo.save(tt);
 	}
 
 	@Override

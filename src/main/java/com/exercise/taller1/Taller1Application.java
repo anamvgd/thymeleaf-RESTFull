@@ -9,16 +9,23 @@ import org.springframework.context.annotation.Bean;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
 import com.exercise.taller1.model.Autotransition;
+import com.exercise.taller1.model.Docstateinstance;
+import com.exercise.taller1.model.Documentstate;
+import com.exercise.taller1.model.Documentt;
 import com.exercise.taller1.model.Documenttype;
 import com.exercise.taller1.model.FevInstitution;
+import com.exercise.taller1.model.Person;
 import com.exercise.taller1.model.Triggerr;
 import com.exercise.taller1.model.Triggertype;
 import com.exercise.taller1.model.Userr;
 import com.exercise.taller1.model.UserrType;
 import com.exercise.taller1.model.Userselect;
 import com.exercise.taller1.service.AutotransitionService;
+import com.exercise.taller1.service.DocStateInstanceService;
+import com.exercise.taller1.service.DocumentStateService;
 import com.exercise.taller1.service.DocumenttypeService;
 import com.exercise.taller1.service.FevInstitutionService;
+import com.exercise.taller1.service.PersonService;
 import com.exercise.taller1.service.TriggerService;
 import com.exercise.taller1.service.TriggerTypeService;
 import com.exercise.taller1.service.UserSelectService;
@@ -39,7 +46,8 @@ public class Taller1Application {
 	@Bean
 	public CommandLineRunner dummy(UserrService userrServ, FevInstitutionService fevServ,
 			AutotransitionService autotranServ, TriggerTypeService triggerTypeService, TriggerService triggerrService,
-			UserSelectService userSelectService, DocumenttypeService doctypeService) {
+			UserSelectService userSelectService, DocumenttypeService doctypeService, PersonService personService, DocumentStateService docstateService, 
+			DocStateInstanceService docstinstService) {
 		return (args) -> {
 			Userr userr1 = new Userr();
 			userr1.setUserName("Jose");
@@ -88,11 +96,28 @@ public class Taller1Application {
 			userSelectService.save(userselect);
 			
 			Documenttype doctype = new Documenttype();
-			doctype.setDoctypeId(2);
+			//doctype.setDoctypeId(2);
 			doctype.setDoctypeName("Examen");
 			doctype.setInstInstId(new BigDecimal("10"));
 			doctypeService.saveDocumenttype(doctype);
 			
+			Person person1 = new Person();
+		//	person1.setPersId(1);
+			person1.setPersName("David");
+			personService.savePerson(person1);
+			
+			Documentstate docState = new Documentstate();
+			docState.setDocstatId(2);
+			docState.setDocstatName("Disponible");
+			docstateService.add(docState);
+
+			Docstateinstance docstInst = new Docstateinstance();
+			docstInst.setDocstatinsId(1);
+			docstinstService.add(docstInst);
+			
+			/*Documentt document = new Documentt();
+			document.set
+			*/
 		};
 	}
 }

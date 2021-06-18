@@ -33,7 +33,7 @@ public class DocumenttypeServiceImpl implements DocumenttypeService {
 		Documenttype newDocutype = new Documenttype();
 		newDocutype.setDoctypeId(idDocumenttype);
 		newDocutype.setDoctypeName(nameDocumenttype);
-		newDocutype.setInstInstId(instId);
+		//newDocutype.setInstInstId(instId);
 
 		docuRepo.save(newDocutype);
 
@@ -43,7 +43,7 @@ public class DocumenttypeServiceImpl implements DocumenttypeService {
 	@Override
 	public Documenttype saveDocumenttype(Documenttype tt) {
 		// TODO Auto-generated method stub
-		return null;
+		return docuRepo.save(tt);
 	}
 
 	@Override

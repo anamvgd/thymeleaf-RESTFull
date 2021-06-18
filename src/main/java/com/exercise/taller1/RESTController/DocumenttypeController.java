@@ -8,7 +8,7 @@ public interface DocumenttypeController {
 	
 	public Documenttype edit(Documenttype doc) throws Exception;
 
-	public Documenttype add(Documenttype doc);
+	//public Documenttype add(Documenttype doc);
 	
 	public List<Documenttype> findAll();
 	

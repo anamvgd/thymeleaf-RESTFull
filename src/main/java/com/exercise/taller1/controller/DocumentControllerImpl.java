@@ -28,11 +28,6 @@ public class DocumentControllerImpl {
 		this.delegateService = delegateService;
 	}
 	
-/*	@GetMapping("/login")
-	public String login() {
-		return "/login";
-	}
-*/
 	@GetMapping("/document")
 	public String indexDocument(Model model) {
 		model.addAttribute("documents", delegateService.findAll());

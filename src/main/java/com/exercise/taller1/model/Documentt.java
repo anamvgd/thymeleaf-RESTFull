@@ -2,6 +2,9 @@ package com.exercise.taller1.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -31,6 +34,7 @@ public class Documentt implements Serializable {
 
 	//bi-directional many-to-one association to Docstateinstance
 	@OneToMany(mappedBy="documentt")
+	@JsonIgnore
 	private List<Docstateinstance> docstateinstances;
 
 	//bi-directional many-to-one association to Documenttype

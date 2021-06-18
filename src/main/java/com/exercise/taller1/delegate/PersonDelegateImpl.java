@@ -19,7 +19,7 @@ public class PersonDelegateImpl implements PersonDelegate{
 
 
 	@Override
-	public Person savePerson(long idPerson, String namePerson, long idDocument) {
+	public Person savePerson(long idPerson, String namePerson) {
 		// TODO Auto-generated method stub
 		return null;
 	}

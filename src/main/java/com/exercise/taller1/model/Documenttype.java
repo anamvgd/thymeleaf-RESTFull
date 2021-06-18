@@ -2,6 +2,9 @@ package com.exercise.taller1.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -32,12 +35,14 @@ public class Documenttype implements Serializable {
 
 	//bi-directional many-to-one association to Documentstate
 	@OneToMany(mappedBy="documenttype")
+	@JsonIgnore
 	private List<Documentstate> documentstates;
 
 	//bi-directional many-to-one association to Documentt
 	@OneToMany(mappedBy="documenttype")
+	@JsonIgnore
 	private List<Documentt> documentts;
-
+ 
 	public Documenttype() {
 	}
 

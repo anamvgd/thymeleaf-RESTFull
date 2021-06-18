@@ -28,12 +28,12 @@ public class DocumenttypeRestControllerImpl implements DocumenttypeController{
 		return doctypeService.editDocumenttype(doc.getDoctypeId(), doc.getDoctypeName(), doc.getInstInstId());
 	}
 
-	@Override
+	/*@Override
 	@PostMapping("/api/doctypes/adds")
 	public Documenttype add(@RequestBody Documenttype doc) {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 
 	@Override
 	@GetMapping("/api/doctypes")
@@ -47,7 +47,9 @@ public class DocumenttypeRestControllerImpl implements DocumenttypeController{
 	@Override
 	@PostMapping("/api/doctypes")
 	public void save(@RequestBody Documenttype document) {
+		System.out.println("a veeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeer");
 		doctypeService.saveDocumenttype(document);
+		System.out.println("no maaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas");
 		
 	}
 

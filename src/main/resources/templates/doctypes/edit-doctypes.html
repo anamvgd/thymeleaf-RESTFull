@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Edit autotransition</title>
+<title>Edit doctype</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -17,47 +17,31 @@
 </head>
 <body>
 	<div class="container my-5">
-		<h2 class="mb-5">Edit autotransitions</h2>
+		<h2 class="mb-5">Edit documenttype</h2>
 		<div class="row">
 			<div class="col-md-6">
 				<form action="#"
-					th:action="@{/autotransition/edit/{id}(id=${autotransition.autotranId})}"
-					th:object="${autotransition}" method="post">
+					th:action="@{/doctypes/edit-doctypes/{id}(id=${doctypes.doctypeId})}"
+					th:object="${doctypes}" method="post">
 					<div class="row">
-					<input type="hidden" th:field="*{autotranId}" class="form-control" id="autotranId"
+					<input type="hidden" th:field="*{doctypeId}" class="form-control" id="doctypeId"
 							placeholder="id">
 						<div class="form-group col-md-6">
-							<label for="name" class="col-form-label">Name</label> <input
-								th:field="*{autotranName}" class="form-control" id="autotranName"
-								placeholder="name" th:value="${autotransition.autotranName}">
-							<span th:if="${#fields.hasErrors('autotranName')}"
-								th:errors="*{autotranName}" class="text-danger"></span>
+							<label for="name" class="col-form-label">Edit name</label> <input
+								th:field="*{doctypeName}" class="form-control" id="doctypeName"
+								placeholder="name" th:value="${doctypes.doctypeName}">
+							<span th:if="${#fields.hasErrors('doctypeName')}"
+								th:errors="*{doctypeName}" class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="isactive" class="col-form-label">Is active</label> <input
-								th:field="*{autotranIsactive}" class="form-control"
-								id="autotranIsactive" placeholder="autotranIsactive"
-								th:value="autotransition.autotranIsactive"> <span
-								th:if="${#fields.hasErrors('autotranIsactive')}"
-								th:errors="*{autotranIsactive}" class="text-danger"></span>
+							<label for="instInstId" class="col-form-label">Edit inst id</label> <input
+								th:field="*{instInstId}" class="form-control"
+								id="instInstId" placeholder="instInstId"
+								th:value="doctypes.instInstId"> <span
+								th:if="${#fields.hasErrors('instInstId')}"
+								th:errors="*{instInstId}" class="text-danger"></span>
 						</div>
-						<div class="form-group col-md-6">
-							<label for="autotranLogicaloperand" class="col-form-label">Logical
-								Operand</label> <input th:field="*{autotranLogicaloperand}"
-								class="form-control" id="autotranLogicaloperand"
-								placeholder="Logical operand"
-								th:value="autotransition.autotranLogicaloperand"> <span
-								th:if="${#fields.hasErrors('autotranLogicaloperand')}"
-								th:errors="*{autotranLogicaloperand}" class="text-danger"></span>
-						</div>
-						<div class="form-group col-md-6">
-							<label for="fevInstitution" class="col-form-label">Institution</label>
-							<select th:field="*{instInstId}" class="form-control"
-								id="fevInstitution">
-								<option th:each="inst : ${fevInstitution}"
-									th:value="${inst.instId}" th:text="${inst.instName}" />
-							</select>
-						</div>
+						
 						<div></div>
 					</div>
 					<div class="row">

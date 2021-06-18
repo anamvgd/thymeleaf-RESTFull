@@ -4,7 +4,7 @@ import com.exercise.taller1.model.Person;
 
 public interface PersonDelegate {
 	
-	public Person savePerson(long idPerson, String namePerson, long idDocument);
+	public Person savePerson(long idPerson, String namePerson);
 
 	public Person savePerson(Person tt);
 

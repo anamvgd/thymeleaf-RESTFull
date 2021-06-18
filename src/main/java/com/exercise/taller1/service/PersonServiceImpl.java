@@ -23,23 +23,15 @@ public class PersonServiceImpl implements PersonService {
 	}
 
 	@Override
-	public Person savePerson(long idPerson, String namePerson, long idDocument) throws RuntimeException {
+	public Person savePerson(long idPerson, String namePerson) throws RuntimeException {
 		if (namePerson.equalsIgnoreCase("") || namePerson == null) {
 			throw new RuntimeException("No namePerson - savePerson()");
 		}
 
-		Documentt docu;
-
-		if (docuRepo.findById(idDocument) == null) {
-			throw new RuntimeException("No docutype - saveDocumentt()");
-		} else {
-			docu = docuRepo.findById(idDocument);
-		}
-
+		
 		Person person = new Person();
 		// newDocu.setDocId(idDocumentt);
 		person.setPersName(namePerson);
-		person.addDocumentt(docu);
 
 		personRepo.save(person);
 
