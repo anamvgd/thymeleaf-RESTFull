@@ -1,5 +1,7 @@
 package com.exercise.taller1;
 
+import java.math.BigDecimal;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
 import com.exercise.taller1.model.Autotransition;
+import com.exercise.taller1.model.Documenttype;
 import com.exercise.taller1.model.FevInstitution;
 import com.exercise.taller1.model.Triggerr;
 import com.exercise.taller1.model.Triggertype;
@@ -14,6 +17,7 @@ import com.exercise.taller1.model.Userr;
 import com.exercise.taller1.model.UserrType;
 import com.exercise.taller1.model.Userselect;
 import com.exercise.taller1.service.AutotransitionService;
+import com.exercise.taller1.service.DocumenttypeService;
 import com.exercise.taller1.service.FevInstitutionService;
 import com.exercise.taller1.service.TriggerService;
 import com.exercise.taller1.service.TriggerTypeService;
@@ -35,7 +39,7 @@ public class Taller1Application {
 	@Bean
 	public CommandLineRunner dummy(UserrService userrServ, FevInstitutionService fevServ,
 			AutotransitionService autotranServ, TriggerTypeService triggerTypeService, TriggerService triggerrService,
-			UserSelectService userSelectService) {
+			UserSelectService userSelectService, DocumenttypeService doctypeService) {
 		return (args) -> {
 			Userr userr1 = new Userr();
 			userr1.setUserName("Jose");
@@ -82,6 +86,13 @@ public class Taller1Application {
 			userselect.setUsselValueusercolumn("1");
 			userselect.setUsselWherestatement("Calf");
 			userSelectService.save(userselect);
+			
+			Documenttype doctype = new Documenttype();
+			doctype.setDoctypeId(2);
+			doctype.setDoctypeName("Examen");
+			doctype.setInstInstId(new BigDecimal("10"));
+			doctypeService.saveDocumenttype(doctype);
+			
 		};
 	}
 }
